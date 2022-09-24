@@ -20,19 +20,23 @@ const Navbar = () => {
           <Image
             src={Logo}
             alt='Twitch logo'
-            width='36'
-            height='36'
+            width='24'
+            height='28'
             className='cursor-pointer z-10'
           />
         </Link>
-        <p className='p-4'>Seguindo</p>
-        <p className='p-4'>Procurar</p>
+        <p className='p-4 hover:text-[#bf94ff] font-bold cursor-pointer'>
+          Seguindo
+        </p>
+        <p className='p-4 hover:text-[#bf94ff] font-bold cursor-pointer'>
+          Procurar
+        </p>
         <div className='p-4'>
           <Menu
             as='div'
             className='relative text-left'>
             <div
-              className='flex hover:bg-opacity-10 hover:bg-[#fff] p-2 rounded-lg'
+              className='flex hover:bg-opacity-10 hover:bg-[#fff] p-2 rounded-md'
               title='Mais'>
               <Menu.Button>
                 <BsThreeDotsVertical size={20} />
@@ -99,12 +103,12 @@ const Navbar = () => {
       </div>
       {/* Middle */}
       <div className='hidden md:flex grow-[2] items-center justify-center'>
-        <div className='text-[#fff] flex justify-center items-center max-w-[400px] m-auto gap-[1px]'>
-          <div>
+        <div className='text-[#fff] flex justify-between items-center max-w-[400px] w-full m-auto gap-[1px]'>
+          <div className='w-full'>
             <input
               type='text'
-              className='bg-[#FFFFFF33] py-1 px-6 rounded-l border-transparent focus:border-[#9147ff] focus:bg-[#000] border-solid border-2 hover:border-[1px] hover:border-[#848494] focus:outline-none placeholder:text-gray-300 placeholder:text-start'
-              placeholder='Pesquisa'
+              className='bg-[#FFFFFF33] w-full py-1 px-1 rounded-l border-transparent focus:border-[#9147ff] focus:bg-[#000] border-solid border-2 hover:border-[1px] hover:border-[#ffffff33] focus:outline-none placeholder:text-gray-300 placeholder:text-start'
+              placeholder='Buscar'
             />
           </div>
           <div className='bg-[#FFFFFF26] py-2 px-2 rounded-r hover:bg-[#FFFFFF33]'>
@@ -112,7 +116,29 @@ const Navbar = () => {
           </div>
         </div>
       </div>
+
       {/* Right Side */}
+      <div className='hidden md:flex grow items-center justify-end'>
+        <div className='flex items-center gap-2'>
+          <Link href='/'>
+            <button className='px-4 py-1 rounded-md font-bold bg-[#FFFFFF26] hover:bg-[#FFFFFF33] h-[30px] items-center'>
+              Entrar
+            </button>
+          </Link>
+          <Link href='/'>
+            <button className='px-4 py-1 rounded-md font-bold bg-[#9147ff] hover:bg-[#772ce8] h-[30px] items-center'>
+              Cadastrar-se
+            </button>
+          </Link>
+
+          <div className='hover:bg-opacity-10 hover:bg-[#fff] rounded-md py-1 px-1'>
+            <BsPerson
+              size={25}
+              className='cursor-pointer'
+            />
+          </div>
+        </div>
+      </div>
     </div>
   )
 }
