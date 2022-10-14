@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { Menu, Transition } from '@headlessui/react'
 import { BsPerson, BsSearch, BsThreeDotsVertical } from 'react-icons/bs'
 import { AiOutlineMenu, AiOutlineClose } from 'react-icons/ai'
-import { Fragment } from 'react'
+import { Fragment, useState } from 'react'
 // import { useSession, signIn, signOut } from 'next-auth/react'
 
 function classNames(...classes: any) {
@@ -12,6 +12,11 @@ function classNames(...classes: any) {
 }
 
 const Navbar = () => {
+  const [nav, setNav] = useState(false)
+
+  const handleNav = () => {
+    setNav(!nav)
+  }
   return (
     <div className='fixed h-14 w-full flex flex-nowrap items-center p-4 bg-[#0e0e10] mb-[2px] z-10'>
       {/* Left Side */}
@@ -120,12 +125,12 @@ const Navbar = () => {
       {/* Right Side */}
       <div className='hidden md:flex grow items-center justify-end'>
         <div className='flex items-center gap-2'>
-          <Link href='/'>
+          <Link href='/account'>
             <button className='px-4 py-1 rounded-md font-bold bg-[#FFFFFF26] hover:bg-[#FFFFFF33] h-[30px] items-center'>
               Entrar
             </button>
           </Link>
-          <Link href='/'>
+          <Link href='/account'>
             <button className='px-4 py-1 rounded-md font-bold bg-[#9147ff] hover:bg-[#772ce8] h-[30px] items-center'>
               Cadastrar-se
             </button>
@@ -138,6 +143,55 @@ const Navbar = () => {
             />
           </div>
         </div>
+      </div>
+
+      {/* Hamburger menu */}
+      <div className='block md:hidden z-20 cursor-pointer'>
+        {nav ? (
+          <AiOutlineClose
+            size={25}
+            onClick={handleNav}
+          />
+        ) : (
+          <AiOutlineMenu
+            size={25}
+            onClick={handleNav}
+          />
+        )}
+      </div>
+
+      {/* Mobile Menu */}
+      <div
+        className={
+          nav
+            ? 'md:hidden fixed top-0 left-0 w-full h-screen bg-[#0e0e10] flex justify-center items-center ease-in duration-500'
+            : 'md:hidden fixed top-[-100%] left-0 w-full h-screen bg-[#0e0e10] flex justify-center items-center ease-in duration-500'
+        }>
+        <ul className='text-center'>
+          <li
+            className='py-4 text-3xl font-bold'
+            onClick={handleNav}>
+            <Link href='/'>Home</Link>
+          </li>
+
+          <li
+            className='py-4 text-3xl font-bold'
+            onClick={handleNav}>
+            <Link href='/'>Live Channels</Link>
+          </li>
+
+          <li
+            className='py-4 text-3xl font-bold'
+            onClick={handleNav}>
+            <Link href='/'>Top Categories</Link>
+          </li>
+
+          <li
+            className='py-4 text-3xl font-bold'
+            onClick={handleNav}>
+            <Link href='/account'>Account</Link>
+          </li>
+        </ul>
       </div>
     </div>
   )

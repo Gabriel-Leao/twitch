@@ -1,13 +1,14 @@
 import '../styles/globals.css'
-import type { AppProps } from 'next/app'
+import { SessionProvider } from 'next-auth/react'
 import Navbar from '../components/navbar'
+import { I_app } from '../interfaces'
 
-function MyApp({ Component, pageProps }: AppProps) {
+function MyApp({ Session, Component, pageProps }: I_app) {
   return (
-    <>
+    <SessionProvider session={Session}>
       <Navbar />
       <Component {...pageProps} />
-    </>
+    </SessionProvider>
   )
 }
 
