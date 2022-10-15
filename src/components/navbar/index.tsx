@@ -5,7 +5,7 @@ import { Menu, Transition } from '@headlessui/react'
 import { BsPerson, BsSearch, BsThreeDotsVertical } from 'react-icons/bs'
 import { AiOutlineMenu, AiOutlineClose } from 'react-icons/ai'
 import { Fragment, useState } from 'react'
-// import { useSession, signIn, signOut } from 'next-auth/react'
+import { useSession, signIn, signOut } from 'next-auth/react'
 
 function classNames(...classes: any) {
   return classes.filter(Boolean).join(' ')
@@ -17,6 +17,9 @@ const Navbar = () => {
   const handleNav = () => {
     setNav(!nav)
   }
+
+  const { data: session } = useSession()
+
   return (
     <div className='fixed h-14 w-full flex flex-nowrap items-center p-4 bg-[#0e0e10] mb-[2px] z-10'>
       {/* Left Side */}
@@ -136,11 +139,21 @@ const Navbar = () => {
             </button>
           </Link>
 
-          <div className='hover:bg-opacity-10 hover:bg-[#fff] rounded-md py-1 px-1'>
-            <BsPerson
-              size={25}
-              className='cursor-pointer'
-            />
+          <div className='flex items-center hover:bg-opacity-10 hover:bg-[#fff] rounded-md py-1 px-1'>
+            {session ? (
+              <Image
+                alt='/'
+                src={session.user?.image}
+                height={25}
+                width={25}
+                className='rounded-full cursor-pointer'
+              />
+            ) : (
+              <BsPerson
+                size={25}
+                className='cursor-pointer'
+              />
+            )}
           </div>
         </div>
       </div>
