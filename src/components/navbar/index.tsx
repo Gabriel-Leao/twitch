@@ -133,7 +133,7 @@ const Navbar = () => {
 
       {/* Middle */}
       <div className='hidden md:flex grow-[2] items-center justify-center'>
-        <div className='text-[#fff] flex justify-between items-center max-w-[400px] w-full m-auto gap-[1px]'>
+        <div className='text-[#fff] flex justify-between items-center max-w-[400px] w-full mx-auto gap-[1px]'>
           <div className='w-full'>
             <input
               type='text'
@@ -149,6 +149,85 @@ const Navbar = () => {
 
       {/* Right Side */}
       <div className='hidden md:flex grow items-center justify-end'>
+        {session && (
+          <>
+            <div className='cursor-pointer mr-1 flex items-center py-2 px-2 hover:bg-opacity-10 hover:bg-[#fff] rounded-md'>
+              <svg
+                width='20'
+                height='20'
+                version='1.1'
+                viewBox='0 0 20 20'
+                x='0px'
+                y='0px'
+                className='ScIconSVG-sc-1bgeryd-1 ifdSJl'
+                fill='#fff'>
+                <g>
+                  <path
+                    fill-rule='evenodd'
+                    clip-rule='evenodd'
+                    d='M13.798 10.456L10 6.657l-3.798 3.799L4 8.805V13h12V8.805l-2.202 1.65zM18 5v8a2 2 0 0 1-2 2H4a2.002 2.002 0 0 1-2-2V5l4 3 4-4 4 4 4-3z'></path>
+                </g>
+              </svg>
+            </div>
+
+            <div className='cursor-pointer mr-1 flex items-center py-2 px-2 hover:bg-opacity-10 hover:bg-[#fff] rounded-md'>
+              <svg
+                width='20'
+                height='20'
+                version='1.1'
+                viewBox='0 0 20 20'
+                x='0px'
+                y='0px'
+                className='ScIconSVG-sc-1bgeryd-1 ifdSJl'
+                fill='#fff'>
+                <g>
+                  <path
+                    fill-rule='evenodd'
+                    d='M4 3h12l2 4v10H2V7l2-4zm.236 4H8v1a1 1 0 001 1h2a1 1 0 001-1V7h3.764l-1-2H5.236l-1 2zM16 9h-2.17A3.001 3.001 0 0111 11H9a3.001 3.001 0 01-2.83-2H4v6h12V9z'
+                    clip-rule='evenodd'></path>
+                </g>
+              </svg>
+            </div>
+
+            <div className='cursor-pointer mr-1 flex items-center py-2 px-2 hover:bg-opacity-10 hover:bg-[#fff] rounded-md'>
+              <svg
+                width='20'
+                height='20'
+                version='1.1'
+                viewBox='0 0 20 20'
+                x='0px'
+                y='0px'
+                className='ScIconSVG-sc-1bgeryd-1 ifdSJl'
+                fill='#fff'>
+                <g>
+                  <path
+                    fill-rule='evenodd'
+                    d='M7.828 13L10 15.172 12.172 13H15V5H5v8h2.828zM10 18l-3-3H5a2 2 0 01-2-2V5a2 2 0 012-2h10a2 2 0 012 2v8a2 2 0 01-2 2h-2l-3 3z'
+                    clip-rule='evenodd'></path>
+                </g>
+              </svg>
+            </div>
+
+            <button className='flex items-center bg-[#1f1f23] hover:bg-[#3b3b44] px-3 py-1 rounded-md mr-1 text-sm'>
+              <svg
+                width='20'
+                height='20'
+                version='1.1'
+                viewBox='0 0 20 20'
+                x='0px'
+                y='0px'
+                className='ScIconSVG-sc-1bgeryd-1 ifdSJl text-[#fff]'
+                fill='#fff'>
+                <path
+                  fill-rule='evenodd'
+                  clip-rule='evenodd'
+                  d='M3 12l7-10 7 10-7 6-7-6zm2.678-.338L10 5.487l4.322 6.173-.85.728L10 11l-3.473 1.39-.849-.729z'></path>
+              </svg>
+              Comprar bits
+            </button>
+          </>
+        )}
+
         <div className='flex items-center gap-2'>
           {session == null && (
             <>
@@ -165,25 +244,21 @@ const Navbar = () => {
             </>
           )}
 
-          <div className='flex items-center hover:bg-opacity-10 hover:bg-[#fff] rounded-md py-1 px-1'>
+          <div>
             {session ? (
-              <div className='p-4'>
+              <div>
                 <Menu
                   as='div'
-                  className='relative text-left'>
-                  <div
-                    className='flex hover:bg-opacity-10 hover:bg-[#fff] p-2 rounded-md'
-                    title='Mais'>
-                    <Menu.Button>
-                      <Image
-                        alt='/'
-                        src={session.user?.image}
-                        height={30}
-                        width={30}
-                        className='rounded-full cursor-pointer'
-                      />
-                    </Menu.Button>
-                  </div>
+                  className='relative text-left py-1 px-1'>
+                  <Menu.Button>
+                    <Image
+                      alt='/'
+                      src={session.user?.image}
+                      height={30}
+                      width={30}
+                      className='rounded-full cursor-pointer'
+                    />
+                  </Menu.Button>
 
                   <Transition
                     as={Fragment}
@@ -193,29 +268,20 @@ const Navbar = () => {
                     leave='transition ease-in duration-75'
                     leaveFrom='transform opacity-100 scale-100'
                     leaveTo='transform opacity-0 scale-95'>
-                    <Menu.Items className='origin-top-right absolute left-0 mt-2 w-56 rounded-md shadow-lg bg-[#0e0e10] ring-1 ring-white ring-opacity-5 focus:outline-none'>
-                      <div className='py-1'>
+                    <Menu.Items className='origin-top-right left-[-190px] absolute w-56 px-4 py-2 mt-4 rounded-md shadow-lg bg-[#0e0e10] ring-1 ring-white ring-opacity-5 focus:outline-none'>
+                      <div>
                         <Menu.Item>
                           {({ active }) => (
-                            <a
-                              href='#'
-                              className='text-gray-400 block px-4 py-2 cursor-text'>
-                              GERAL
-                            </a>
-                          )}
-                        </Menu.Item>
-
-                        <Menu.Item>
-                          {({ active }) => (
+                            // eslint-disable-next-line @next/next/no-html-link-for-pages
                             <button
                               onClick={() => signOut()}
                               className={classNames(
                                 active
-                                  ? 'bg-gray-500 text-[#fff] rounded-md'
+                                  ? 'bg-[#1f1f23] text-[#fff] rounded-md'
                                   : 'text-gray-200',
-                                'block px-4 py-2 text-sm'
+                                'flex items-center px-4 py-1 w-full'
                               )}>
-                              <BiLogOut /> Sair
+                              <BiLogOut className='mr-1' /> Sair
                             </button>
                           )}
                         </Menu.Item>
@@ -225,17 +291,13 @@ const Navbar = () => {
                 </Menu>
               </div>
             ) : (
-              <div className='p-4'>
+              <div>
                 <Menu
                   as='div'
                   className='relative text-left'>
-                  <div
-                    className='flex hover:bg-opacity-10 hover:bg-[#fff] p-2 rounded-md'
-                    title='Mais'>
-                    <Menu.Button>
-                      <BsPerson size={25} />
-                    </Menu.Button>
-                  </div>
+                  <Menu.Button className='flex items-center py-1 px-1 hover:bg-opacity-10 hover:bg-[#fff] rounded-md'>
+                    <BsPerson size={25} />
+                  </Menu.Button>
 
                   <Transition
                     as={Fragment}
@@ -245,18 +307,8 @@ const Navbar = () => {
                     leave='transition ease-in duration-75'
                     leaveFrom='transform opacity-100 scale-100'
                     leaveTo='transform opacity-0 scale-95'>
-                    <Menu.Items className='origin-top-right absolute left-0 mt-2 w-56 rounded-md shadow-lg bg-[#0e0e10] ring-1 ring-white ring-opacity-5 focus:outline-none'>
-                      <div className='py-1'>
-                        <Menu.Item>
-                          {({ active }) => (
-                            <a
-                              href='#'
-                              className='text-gray-400 block px-4 py-2 cursor-text'>
-                              GERAL
-                            </a>
-                          )}
-                        </Menu.Item>
-
+                    <Menu.Items className='origin-top-right left-[-190px] absolute w-56 px-4 py-2 mt-4 rounded-md shadow-lg bg-[#0e0e10] ring-1 ring-white ring-opacity-5 focus:outline-none'>
+                      <div>
                         <Menu.Item>
                           {({ active }) => (
                             // eslint-disable-next-line @next/next/no-html-link-for-pages
@@ -264,11 +316,11 @@ const Navbar = () => {
                               href='/account'
                               className={classNames(
                                 active
-                                  ? 'bg-gray-500 text-[#fff] rounded-md'
+                                  ? 'bg-[#1f1f23] text-[#fff] rounded-md'
                                   : 'text-gray-200',
-                                'block px-4 py-2 text-sm'
+                                'flex items-center px-4 py-1'
                               )}>
-                              <BiLogIn /> Entrar
+                              <BiLogIn className='mr-1' /> Entrar
                             </a>
                           )}
                         </Menu.Item>
