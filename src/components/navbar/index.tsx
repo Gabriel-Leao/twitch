@@ -1,11 +1,13 @@
-import Logo from 'public/logo.png'
 import Image from 'next/image'
 import Link from 'next/link'
 import { Menu, Transition } from '@headlessui/react'
 import { BsPerson, BsSearch, BsThreeDotsVertical } from 'react-icons/bs'
+import { BiLogIn, BiLogOut } from 'react-icons/bi'
 import { AiOutlineMenu, AiOutlineClose } from 'react-icons/ai'
 import { Fragment, useState } from 'react'
-import { useSession, signIn, signOut } from 'next-auth/react'
+import { useSession, signOut } from 'next-auth/react'
+import Logo from 'public/logo.png'
+import MenuOptions from '../menuOptions'
 
 function classNames(...classes: any) {
   return classes.filter(Boolean).join(' ')
@@ -33,12 +35,16 @@ const Navbar = () => {
             className='cursor-pointer z-10'
           />
         </Link>
-        <p className='p-4 hover:text-[#bf94ff] font-bold cursor-pointer'>
-          Seguindo
-        </p>
+        {session && (
+          <p className='p-4 hover:text-[#bf94ff] font-bold cursor-pointer'>
+            Seguindo
+          </p>
+        )}
+
         <p className='p-4 hover:text-[#bf94ff] font-bold cursor-pointer'>
           Procurar
         </p>
+
         <div className='p-4'>
           <Menu
             as='div'
@@ -65,50 +71,66 @@ const Navbar = () => {
                     {({ active }) => (
                       <a
                         href='#'
-                        className={classNames(
-                          active
-                            ? 'bg-gray-500 text-gray-100'
-                            : 'text-gray-200',
-                          'block px-4 py-2 text-sm'
-                        )}>
-                        Settings
+                        className='text-gray-400 block px-4 py-2 cursor-text'>
+                        GERAL
                       </a>
                     )}
                   </Menu.Item>
+
+                  {MenuOptions.geralItens.map((item, key) => (
+                    <Menu.Item key={key}>
+                      {({ active }) => (
+                        <a
+                          href={item.link}
+                          target='_blank'
+                          rel='noreferrer'
+                          className={classNames(
+                            active
+                              ? 'bg-gray-500 text-[#fff] rounded-md'
+                              : 'text-gray-200',
+                            'block px-4 py-2 text-sm'
+                          )}>
+                          {item.title}
+                        </a>
+                      )}
+                    </Menu.Item>
+                  ))}
+
                   <Menu.Item>
                     {({ active }) => (
                       <a
                         href='#'
-                        className={classNames(
-                          active
-                            ? 'bg-gray-500 text-gray-100'
-                            : 'text-gray-200',
-                          'block px-4 py-2 text-sm'
-                        )}>
-                        Support
+                        className='text-gray-400 block px-4 py-2 cursor-text'>
+                        AJUDA E JURÍDICO
                       </a>
                     )}
                   </Menu.Item>
-                  <Menu.Item>
-                    {({ active }) => (
-                      <a
-                        href='#'
-                        className={classNames(
-                          active
-                            ? 'bg-gray-500 text-gray-100'
-                            : 'text-gray-200',
-                          'block px-4 py-2 text-sm'
-                        )}>
-                        License
-                      </a>
-                    )}
-                  </Menu.Item>
+
+                  {MenuOptions.helpItens.map((item, key) => (
+                    <Menu.Item key={key}>
+                      {({ active }) => (
+                        <a
+                          href={item.link}
+                          target='_blank'
+                          rel='noreferrer'
+                          className={classNames(
+                            active
+                              ? 'bg-gray-500 text-[#fff] rounded-md'
+                              : 'text-gray-200',
+                            'block px-4 py-2 text-sm'
+                          )}>
+                          {item.title}
+                        </a>
+                      )}
+                    </Menu.Item>
+                  ))}
                 </div>
               </Menu.Items>
             </Transition>
           </Menu>
         </div>
       </div>
+
       {/* Middle */}
       <div className='hidden md:flex grow-[2] items-center justify-center'>
         <div className='text-[#fff] flex justify-between items-center max-w-[400px] w-full m-auto gap-[1px]'>
@@ -128,31 +150,133 @@ const Navbar = () => {
       {/* Right Side */}
       <div className='hidden md:flex grow items-center justify-end'>
         <div className='flex items-center gap-2'>
-          <Link href='/account'>
-            <button className='px-4 py-1 rounded-md font-bold bg-[#FFFFFF26] hover:bg-[#FFFFFF33] h-[30px] items-center'>
-              Entrar
-            </button>
-          </Link>
-          <Link href='/account'>
-            <button className='px-4 py-1 rounded-md font-bold bg-[#9147ff] hover:bg-[#772ce8] h-[30px] items-center'>
-              Cadastrar-se
-            </button>
-          </Link>
+          {session == null && (
+            <>
+              <Link href='/account'>
+                <button className='px-4 py-1 rounded-md font-bold bg-[#FFFFFF26] hover:bg-[#FFFFFF33] h-[30px] items-center'>
+                  Entrar
+                </button>
+              </Link>
+              <Link href='/account'>
+                <button className='px-4 py-1 rounded-md font-bold bg-[#9147ff] hover:bg-[#772ce8] h-[30px] items-center'>
+                  Cadastrar-se
+                </button>
+              </Link>
+            </>
+          )}
 
           <div className='flex items-center hover:bg-opacity-10 hover:bg-[#fff] rounded-md py-1 px-1'>
             {session ? (
-              <Image
-                alt='/'
-                src={session.user?.image}
-                height={25}
-                width={25}
-                className='rounded-full cursor-pointer'
-              />
+              <div className='p-4'>
+                <Menu
+                  as='div'
+                  className='relative text-left'>
+                  <div
+                    className='flex hover:bg-opacity-10 hover:bg-[#fff] p-2 rounded-md'
+                    title='Mais'>
+                    <Menu.Button>
+                      <Image
+                        alt='/'
+                        src={session.user?.image}
+                        height={30}
+                        width={30}
+                        className='rounded-full cursor-pointer'
+                      />
+                    </Menu.Button>
+                  </div>
+
+                  <Transition
+                    as={Fragment}
+                    enter='transition ease-out duration-100'
+                    enterFrom='transform opacity-0 scale-95'
+                    enterTo='transform opacity-100 scale-100'
+                    leave='transition ease-in duration-75'
+                    leaveFrom='transform opacity-100 scale-100'
+                    leaveTo='transform opacity-0 scale-95'>
+                    <Menu.Items className='origin-top-right absolute left-0 mt-2 w-56 rounded-md shadow-lg bg-[#0e0e10] ring-1 ring-white ring-opacity-5 focus:outline-none'>
+                      <div className='py-1'>
+                        <Menu.Item>
+                          {({ active }) => (
+                            <a
+                              href='#'
+                              className='text-gray-400 block px-4 py-2 cursor-text'>
+                              GERAL
+                            </a>
+                          )}
+                        </Menu.Item>
+
+                        <Menu.Item>
+                          {({ active }) => (
+                            <button
+                              onClick={() => signOut()}
+                              className={classNames(
+                                active
+                                  ? 'bg-gray-500 text-[#fff] rounded-md'
+                                  : 'text-gray-200',
+                                'block px-4 py-2 text-sm'
+                              )}>
+                              <BiLogOut /> Sair
+                            </button>
+                          )}
+                        </Menu.Item>
+                      </div>
+                    </Menu.Items>
+                  </Transition>
+                </Menu>
+              </div>
             ) : (
-              <BsPerson
-                size={25}
-                className='cursor-pointer'
-              />
+              <div className='p-4'>
+                <Menu
+                  as='div'
+                  className='relative text-left'>
+                  <div
+                    className='flex hover:bg-opacity-10 hover:bg-[#fff] p-2 rounded-md'
+                    title='Mais'>
+                    <Menu.Button>
+                      <BsPerson size={25} />
+                    </Menu.Button>
+                  </div>
+
+                  <Transition
+                    as={Fragment}
+                    enter='transition ease-out duration-100'
+                    enterFrom='transform opacity-0 scale-95'
+                    enterTo='transform opacity-100 scale-100'
+                    leave='transition ease-in duration-75'
+                    leaveFrom='transform opacity-100 scale-100'
+                    leaveTo='transform opacity-0 scale-95'>
+                    <Menu.Items className='origin-top-right absolute left-0 mt-2 w-56 rounded-md shadow-lg bg-[#0e0e10] ring-1 ring-white ring-opacity-5 focus:outline-none'>
+                      <div className='py-1'>
+                        <Menu.Item>
+                          {({ active }) => (
+                            <a
+                              href='#'
+                              className='text-gray-400 block px-4 py-2 cursor-text'>
+                              GERAL
+                            </a>
+                          )}
+                        </Menu.Item>
+
+                        <Menu.Item>
+                          {({ active }) => (
+                            // eslint-disable-next-line @next/next/no-html-link-for-pages
+                            <a
+                              href='/account'
+                              className={classNames(
+                                active
+                                  ? 'bg-gray-500 text-[#fff] rounded-md'
+                                  : 'text-gray-200',
+                                'block px-4 py-2 text-sm'
+                              )}>
+                              <BiLogIn /> Entrar
+                            </a>
+                          )}
+                        </Menu.Item>
+                      </div>
+                    </Menu.Items>
+                  </Transition>
+                </Menu>
+              </div>
             )}
           </div>
         </div>
