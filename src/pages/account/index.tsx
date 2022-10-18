@@ -11,7 +11,7 @@ const Account = () => {
         <h2 className='text-2xl font-bold'>Bem-vindo, {session.user?.name}!</h2>
         <div className='pb-4 m-auto'>
           <Image
-            src={session.user?.image}
+            src={session.user?.image ? session.user?.image : ''}
             alt='user avatar vindo do github ou google'
             height='100'
             width='100'
@@ -19,7 +19,7 @@ const Account = () => {
           />
         </div>
         <button
-          className='flex items-center justify-center p-3 bg-[#9147ff] border border-gray-600 rounded-full'
+          className='flex items-center justify-center p-3 bg-[#9147ff] border-none rounded-full'
           onClick={() => signOut()}>
           Sair
         </button>
@@ -33,7 +33,7 @@ const Account = () => {
 
       <button
         onClick={() => signIn('github')}
-        className=' flex justify-center items-center p-3 bg-gray-600 border-gray-600 my-2 rounded-full hover:bg-gray-500'>
+        className=' flex justify-center items-center p-3 bg-[#3b3b44] border-[#3b3b44] my-2 rounded-full hover:bg-gray-500'>
         <FaGithub
           className='mr-2'
           size={25}

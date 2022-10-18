@@ -65,13 +65,13 @@ const Navbar = () => {
               leave='transition ease-in duration-75'
               leaveFrom='transform opacity-100 scale-100'
               leaveTo='transform opacity-0 scale-95'>
-              <Menu.Items className='origin-top-right absolute left-0 mt-2 w-56 rounded-md shadow-lg bg-[#0e0e10] ring-1 ring-white ring-opacity-5 focus:outline-none'>
+              <Menu.Items className='origin-top-right absolute left-0 w-52 px-3 rounded-md shadow-lg bg-[#0e0e10] ring-1 ring-white ring-opacity-5 focus:outline-none'>
                 <div className='py-1'>
                   <Menu.Item>
                     {({ active }) => (
                       <a
                         href='#'
-                        className='text-gray-400 block px-4 py-2 cursor-text'>
+                        className='text-gray-400 block px-1 py-2 cursor-text text-xs'>
                         GERAL
                       </a>
                     )}
@@ -86,9 +86,9 @@ const Navbar = () => {
                           rel='noreferrer'
                           className={classNames(
                             active
-                              ? 'bg-gray-500 text-[#fff] rounded-md'
+                              ? 'bg-[#3b3b44] text-[#fff] rounded-md'
                               : 'text-gray-200',
-                            'block px-4 py-2 text-sm'
+                            'block px-1 py-2 text-xs'
                           )}>
                           {item.title}
                         </a>
@@ -97,10 +97,16 @@ const Navbar = () => {
                   ))}
 
                   <Menu.Item>
+                    <div className='py-2'>
+                      <div className='border-t-[#3b3b44] border-[1px] border-b-0 border-l-0 border-r-0 px-1'></div>
+                    </div>
+                  </Menu.Item>
+
+                  <Menu.Item>
                     {({ active }) => (
                       <a
                         href='#'
-                        className='text-gray-400 block px-4 py-2 cursor-text'>
+                        className='text-gray-400 block px-1 py-2 cursor-text text-xs'>
                         AJUDA E JURÍDICO
                       </a>
                     )}
@@ -115,9 +121,9 @@ const Navbar = () => {
                           rel='noreferrer'
                           className={classNames(
                             active
-                              ? 'bg-gray-500 text-[#fff] rounded-md'
+                              ? 'bg-[#3b3b44] text-[#fff] rounded-md'
                               : 'text-gray-200',
-                            'block px-4 py-2 text-sm'
+                            'block px-1 py-2 text-xs'
                           )}>
                           {item.title}
                         </a>
@@ -249,14 +255,13 @@ const Navbar = () => {
               <div>
                 <Menu
                   as='div'
-                  className='relative text-left py-1 px-1'>
-                  <Menu.Button>
+                  className='relative text-left'>
+                  <Menu.Button className='flex items-center py-1 px-1 rounded-full'>
                     <Image
                       alt='/'
-                      src={session.user?.image}
-                      height={30}
+                      src={session.user?.image ? session.user?.image : ''}
                       width={30}
-                      className='rounded-full cursor-pointer'
+                      height={30}
                     />
                   </Menu.Button>
 
@@ -268,8 +273,12 @@ const Navbar = () => {
                     leave='transition ease-in duration-75'
                     leaveFrom='transform opacity-100 scale-100'
                     leaveTo='transform opacity-0 scale-95'>
-                    <Menu.Items className='origin-top-right left-[-190px] absolute w-56 px-4 py-2 mt-4 rounded-md shadow-lg bg-[#0e0e10] ring-1 ring-white ring-opacity-5 focus:outline-none'>
+                    <Menu.Items className='origin-top-right left-[-185px] absolute w-56 px-3 py-2 mt-2 rounded-md shadow-lg bg-[#0e0e10] ring-1 ring-white ring-opacity-5 focus:outline-none'>
                       <div>
+                        <Menu.Item>
+                          <div className='border-t-[#3b3b44] border-[1px] border-b-0 border-l-0 border-r-0 py-1 px-1'></div>
+                        </Menu.Item>
+
                         <Menu.Item>
                           {({ active }) => (
                             // eslint-disable-next-line @next/next/no-html-link-for-pages
@@ -279,7 +288,7 @@ const Navbar = () => {
                                 active
                                   ? 'bg-[#1f1f23] text-[#fff] rounded-md'
                                   : 'text-gray-200',
-                                'flex items-center px-4 py-1 w-full'
+                                'flex items-center px-1 py-1 w-full'
                               )}>
                               <BiLogOut className='mr-1' /> Sair
                             </button>
@@ -307,8 +316,12 @@ const Navbar = () => {
                     leave='transition ease-in duration-75'
                     leaveFrom='transform opacity-100 scale-100'
                     leaveTo='transform opacity-0 scale-95'>
-                    <Menu.Items className='origin-top-right left-[-190px] absolute w-56 px-4 py-2 mt-4 rounded-md shadow-lg bg-[#0e0e10] ring-1 ring-white ring-opacity-5 focus:outline-none'>
+                    <Menu.Items className='origin-top-right left-[-185px] absolute w-56 px-3 py-2 mt-2 rounded-md shadow-lg bg-[#0e0e10] ring-1 ring-white ring-opacity-5 focus:outline-none'>
                       <div>
+                        <Menu.Item>
+                          <div className='border-t-[#3b3b44] border-[1px] border-b-0 border-l-0 border-r-0 py-1 px-1'></div>
+                        </Menu.Item>
+
                         <Menu.Item>
                           {({ active }) => (
                             // eslint-disable-next-line @next/next/no-html-link-for-pages
@@ -318,7 +331,7 @@ const Navbar = () => {
                                 active
                                   ? 'bg-[#1f1f23] text-[#fff] rounded-md'
                                   : 'text-gray-200',
-                                'flex items-center px-4 py-1'
+                                'flex items-center px-1 py-1'
                               )}>
                               <BiLogIn className='mr-1' /> Entrar
                             </a>
